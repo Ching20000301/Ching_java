@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class ABGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // 輸入答案 a，必須為4位數
+        System.out.print("請輸入答案 (4位數字): ");
+        String a = scanner.next();
+        while(a.length() != 4) {
+            System.out.print("輸入錯誤！請再次輸入4位數字: ");
+            a = scanner.next();
+        }
+        
+        System.out.println("遊戲開始！");
+        
+        // 進入遊戲迴圈
+        while(true) {
+            System.out.print("請輸入你的猜測 (4位數字): ");
+            String b = scanner.next();
+            
+            // 檢查輸入是否為4位數
+            if(b.length() != 4) {
+                System.out.println("輸入錯誤，請確保是4位數字！");
+                continue;
+            }
+            
+            int countA = 0;  // 位置與數字都正確的數量
+            int countB = 0;  // 數字存在但位置不正確的數量
+            
+            // 檢查每個位數
+            for (int i = 0; i < 4; i++) {
+                char chB = b.charAt(i);
+                // 如果同位置的數字相同則為 A
+                if (chB == a.charAt(i)) {
+                    countA++;
+                } else if (a.indexOf(chB) != -1) {  
+                    // 如果該數字在答案中存在但位置不正確則為 B
+                    countB++;
+                }
+            }
+            
+            System.out.println(countA + "A" + countB + "B");
+            
+            // 當答案與猜測完全相同時，結束遊戲
+            if (a.equals(b)) {
+                System.out.println("恭喜你，猜中答案！遊戲結束。");
+                break;
+            }
+        }
+        
+        scanner.close();
+    }
+}
