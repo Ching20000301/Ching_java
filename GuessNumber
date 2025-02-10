@@ -1,0 +1,51 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class GuessNumberGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        // 設定猜數字的範圍
+        int lowerBound = 1;
+        int upperBound = 50;
+        // 產生答案 (隨機數介於 lowerBound 與 upperBound 之間)
+        int target = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+        int attempts = 0;  // 紀錄使用者的嘗試次數
+
+        System.out.println("歡迎來到猜數字遊戲！");
+        System.out.println("請猜一個介於 " + lowerBound + " 到 " + upperBound + " 之間的數字。");
+
+        // 遊戲迴圈
+        while (true) {
+            System.out.print("請輸入你的猜測: ");
+            int guess = scanner.nextInt();
+            attempts++;
+
+            // 檢查輸入數字是否在設定的範圍內
+            if (guess < lowerBound || guess > upperBound) {
+                System.out.println("錯誤：請輸入介於 " + lowerBound + " 到 " + upperBound + " 之間的數字。");
+                // 該次輸入不進行後續判斷，繼續下一次迴圈
+                continue;
+            }
+
+            // 猜對了則顯示祝賀訊息及嘗試次數，然後結束遊戲
+            if (guess == target) {
+                System.out.println("恭喜你猜對了！");
+                System.out.println("你總共嘗試了 " + attempts + " 次。");
+                break;
+            } else {
+                System.out.println("猜錯了！");
+                // 詢問使用者是否要繼續遊戲
+                System.out.print("你想繼續玩嗎？請輸入 Y 繼續，或輸入其他任意鍵退出: ");
+                String response = scanner.next();
+                if (!response.equalsIgnoreCase("Y")) {
+                    System.out.println("遊戲結束。謝謝你的參與！");
+                    break;
+                }
+            }
+        }
+        
+        scanner.close();
+    }
+}
