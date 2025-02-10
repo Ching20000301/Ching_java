@@ -1,0 +1,42 @@
+import java.util.Scanner;
+import java.math.BigInteger;
+
+public class PrimeProduct {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("請輸入一個正整數: ");
+        int n = scanner.nextInt();
+
+        // 當輸入數字小於2時，表示沒有質數可計算
+        if(n < 2) {
+            System.out.println("輸入的數字太小，沒有質數可供計算。");
+            scanner.close();
+            return;
+        }
+        
+        // 初始乘積為1 (空乘積預設值)
+        BigInteger product = BigInteger.ONE;
+        
+        // 從2開始，因為2是最小的質數
+        for (int i = 2; i <= n; i++) {
+            if (isPrime(i)) {
+                product = product.multiply(BigInteger.valueOf(i));
+            }
+        }
+        
+        System.out.println("所有小於或等於 " + n + " 的質數的乘積為: " + product);
+        scanner.close();
+    }
+    
+    // 判斷一個數是否為質數
+    public static boolean isPrime(int num) {
+        if(num < 2) return false;
+        // 只需檢查到 sqrt(num)
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
