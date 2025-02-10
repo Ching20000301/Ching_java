@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Abbreviation {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // 提示使用者輸入一段話
+        System.out.print("請輸入一段話: ");
+        String input = scanner.nextLine();  // 讀取整行輸入
+        
+        // 使用正規表達式依照空白字元分割成單字
+        String[] words = input.trim().split("\\s+");
+        
+        StringBuilder abbreviation = new StringBuilder();
+        
+        // 逐一取得每個單字的第一個字母
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                abbreviation.append(word.charAt(0));
+            }
+        }
+        
+        // 輸出縮寫結果
+        System.out.println("縮寫為: " + abbreviation.toString());
+        
+        scanner.close();
+    }
+}
